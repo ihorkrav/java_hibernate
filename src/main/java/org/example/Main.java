@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
@@ -19,7 +20,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         getListCategories();
-       // addProductPhoto();
+        addProductPhoto();
         getListCategories();
     }
     private static void addCategory(){
@@ -194,13 +195,13 @@ public class Main {
             int id = scanner.nextInt();
             scanner.nextLine();
             System.out.println("Enter image path: ");
-            Path path = Paths.get(scanner.nextLine());
-            String filename = String.valueOf(path.getFileName());
+            String path = scanner.nextLine();
 
-
-            Path to = Paths.get("E:\\STEP\\JAVA\\hibenate\\hibernator\\images");
+            Path sourcePath = Paths.get(path);
+            String filename = String.valueOf(sourcePath.getFileName());
+            Path destinationPath = Paths.get("E:\\STEP\\JAVA\\hibenate\\hibernator\\images");
             try  {
-                Files.copy(path, to);
+                Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
                 var sf = org.example.util.HibernateUtil.getSessionFactory();
                 try (Session context = sf.openSession()) {
                     context.beginTransaction();

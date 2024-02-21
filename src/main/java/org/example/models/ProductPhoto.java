@@ -7,7 +7,6 @@ import javax.persistence.*;
 @Entity
 @Table(name="tbl_photos")
 public class ProductPhoto {
-
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int id;
@@ -21,11 +20,11 @@ public class ProductPhoto {
 
         @Override
         public String toString() {
-            return "Product{" +
-                    "id=" + id +
-                    ", name='" + name + '\'' +
-                    ", product=" + product.getName() +
-                    '}';
+                return "Photo{" +
+                        "id=" + id +
+                        ", name='" + name + '\'' +
+                        ", product=" + (product != null ? product.getName() : null) +
+                        '}';
         }
 
 }
